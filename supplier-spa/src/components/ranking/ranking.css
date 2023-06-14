@@ -1,0 +1,246 @@
+.ranking-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.column-left,
+.column-middle,
+.column-right {
+    flex: 1;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.column-left h3,
+.column-middle h3,
+.column-right h3 {
+    margin-top: 0;
+    color: #333;
+    font-size: 18px;
+    text-align: center;
+}
+
+.column-left table,
+.column-middle table,
+.column-right table {
+    border-collapse: collapse;
+    border-spacing: 0;
+    width: 100%;
+    border: 1px solid #ddd;
+}
+
+.column-left th,
+.column-left td,
+.column-middle th,
+.column-middle td,
+.column-right th,
+.column-right td {
+    padding: 12px 14px;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+    font-size: 14px;
+}
+
+.column-left th,
+.column-middle th,
+.column-right th {
+    font-weight: bold;
+    color: #333;
+}
+
+.column-left tbody tr:nth-child(even),
+.column-middle tbody tr:nth-child(even),
+.column-right tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.column-left tbody tr:last-child,
+.column-middle tbody tr:last-child,
+.column-right tbody tr:last-child {
+    border-bottom: none;
+}
+
+.column-left td:nth-child(2),
+.column-left li strong {
+    color: #555;
+    font-weight: bold;
+    text-transform: capitalize;
+}
+
+.column-left ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.column-left li {
+    margin-bottom: 10px;
+    color: #333;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.column-middle .scrollable-table {
+    max-height: 500px;
+    overflow-y: scroll;
+    border-radius: 2rem;
+    box-shadow: 0 0.2rem 0.6rem rgba(0, 0, 0, 0.3);
+}
+
+.column-middle .scrollable-table::-webkit-scrollbar {
+    width: 10px;
+    background-color: #f5f5f5;
+}
+
+.column-middle .scrollable-table::-webkit-scrollbar-thumb {
+    background-color: #09ad;
+}
+
+.column-middle .scrollable-table::-webkit-scrollbar-thumb:hover {
+    background-color: #0797;
+}
+
+.column-middle th,
+.column-middle td {
+    text-align: left;
+    padding: 16px;
+}
+
+.column-middle tbody tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.column-middle .analyse-button,
+.column-right .clear-button,
+.column-right .save-button {
+    display: block;
+    margin-top: 10px;
+    padding: 12px 16px;
+    background-color: #09ad;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.column-middle .analyse-button:hover,
+.column-right .clear-button:hover,
+.column-right .save-button:hover {
+    background-color: rgba(1, 2, 11, 0.467);
+}
+
+.column-right {
+    border-radius: 1rem;
+    box-shadow: 0 2px 4px #09ad;
+    margin-right: 20px;
+    margin-top: 100px;
+}
+
+.column-right table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+.column-right th,
+.column-right td {
+    padding: 12px 16px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+    font-size: 14px;
+}
+
+.column-right th {
+    font-weight: bold;
+    color: #333;
+}
+
+.column-right tbody tr:hover {
+    background-color: #f5f5f5;
+}
+
+.column-right tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.column-right .ranking-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+.column-right .clear-button,
+.column-right .save-button {
+    padding: 8px 16px;
+    border-radius: 4px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.column-right .clear-button {
+    background-color: red;
+    color: #fff;
+}
+
+.column-right .clear-button:hover {
+    background-color: darkred;
+}
+
+.column-right .save-button {
+    background-color: green;
+    color: #fff;
+}
+
+.column-right .save-button:hover {
+    background-color: darkgreen;
+}
+
+@media (max-width: 768px) {
+    .ranking-container {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .column-left,
+    .column-middle,
+    .column-right {
+        margin-bottom: 20px;
+    }
+
+    .column-right {
+        margin-right: 0;
+    }
+
+    .column-left table,
+    .column-middle table,
+    .column-right table {
+        width: 100%;
+    }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+    .ranking-container {
+        flex-wrap: wrap;
+    }
+
+    .column-left,
+    .column-middle,
+    .column-right {
+        width: 50%;
+    }
+}
+
+@media (min-width: 1025px) {
+    .ranking-container {
+        flex-wrap: nowrap;
+    }
+
+    .column-left,
+    .column-middle,
+    .column-right {
+        width: auto;
+    }
+}

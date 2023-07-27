@@ -1,119 +1,73 @@
-.main-dashboard {
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
-    width: 100%;
-    margin: 0 auto;
-    justify-content: center;
-    align-items: center;
-}
-
-.dashboard-nav {
-    background: #f1f1f1;
-    padding: 10px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.dashboard-nav ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
-.dashboard-nav ul li {
-    display: inline;
+/* Define the styles for the links */
+.dashboard-link {
+    text-decoration: none;
+    color: #09ad;
+    font-weight: bold;
     margin-right: 10px;
 }
 
-.dashboard-nav ul li a {
-    text-decoration: none;
-    color: #333;
-}
-
-.dropdown {
-    position: relative;
-}
-
-.dropdown-btn {
-    background-color: transparent;
-    border: none;
-    cursor: pointer;
-    padding: 0;
-    font-weight: bold;
-}
-
-.dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: #f9f9f9;
-    min-width: 150px;
-    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
-}
-
-.dropdown-content button {
-    display: block;
-    width: 100%;
-    text-align: left;
-    padding: 10px;
-    border: none;
-    background-color: transparent;
-    cursor: pointer;
-}
-
-.dropdown:hover .dropdown-content {
-    display: block;
-}
-
-.dashboard-content {
-    flex-grow: 1;
+/* Style the chart container */
+.chart-container {
+    width: 80%;
+    max-width: 600px;
+    margin: 20px auto;
     display: flex;
-    padding: 20px;
+    justify-content: center;
+    box-shadow: 0 6px 10px #09ad;
+}
+
+/* Style the chart canvas */
+.chart-container canvas {
+    width: 100%;
+    max-width: 600px;
+    height: auto;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+/* Style the table */
+.dashboard-table {
+    width: 100%;
+    max-width: 1000px;
+    border-collapse: collapse;
+    margin: 20px auto;
+}
+
+/* Style the table headers */
+.dashboard-table th {
+    background-color: rgba(6, 76, 83, 0.867);
+    padding: 10px;
+    text-align: left;
+    color: white;
+}
+
+/* Style the table cells */
+.dashboard-table td {
+    padding: 10px;
+}
+
+/* Apply alternating row colors */
+.dashboard-table tbody tr:nth-child(even) {
+    background-color: #8f8c8c;
+}
+
+/* Apply hover effect to table rows */
+.dashboard-table tbody tr:hover {
+    background-color: #bbbbbb;
 }
 
 .user-info {
-    display: flex;
-    align-items: right;
-}
-
-.username,
-.email {
-    margin-right: 10px;
     font-weight: bold;
-}
-
-.charts-container {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    /* Updated width to 60% */
-    margin-right: 20px;
-}
-
-.chart-card {
-    background: #fff;
-    border: 1px solid #ddd;
-    padding: 20px;
-    margin-bottom: 20px;
-   
-}
-
-.suppliers-list {
-    background: #fff;
-    border: 1px solid #ddd;
-    padding: 20px;
-    flex-grow: 1;
-    overflow-y: auto;
-    width: 50%;
-}
-
-.scrollable-list {
-    max-height: 400px;
-}
-
-.logout-btn {
-    background: #bab8b8;
+    display: inline-block;
     padding: 10px;
-    text-align: center;
+    margin: 5px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.user-info button{
+    text-decoration: none;
+        color: #09ad;
+        font-weight: bold;
+        margin-right: 10px;
 }

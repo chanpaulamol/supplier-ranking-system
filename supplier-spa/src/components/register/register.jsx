@@ -1,6 +1,6 @@
-import axios from "axios";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import axios from "axios";
 import "./register.css";
 
 function Register() {
@@ -8,19 +8,39 @@ function Register() {
         username: "",
         email: "",
         password: "",
-        confirmPassword: ""
+        confirmPassword: "",
     });
+    const [successMessage, setSuccessMessage] = useState("");
+    const [errorMessage, setErrorMessage] = useState("");
+    const [submitClicked, setSubmitClicked] = useState(false);
+    const [existingFields, setExistingFields] = useState([]);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData((prevFormData) => ({
             ...prevFormData,
-            [name]: value
+            [name]: value,
         }));
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setSubmitClicked(true);
+
+        if (formData.password !== formData.confirmPassword) {
+            setErrorMessage("Passwords do not match.");
+            setSuccessMessage("");
+            setFormData((prevFormData) => ({
+                ...prevFormData,
+                password: "",
+                confirmPassword: "",
+            }));
+            setTimeout(() => {
+                setErrorMessage("");
+            }, 5000);
+            return;
+        }
+
         console.log(formData);
         try {
             const response = await axios.post(
@@ -31,7 +51,19 @@ function Register() {
             // Handle success scenario
             if (response.status === 201) {
                 // Registration successful
-                console.log("Registration successful");
+                setSuccessMessage("Registration successful");
+                setErrorMessage("");
+                setFormData({
+                    username: "",
+                    email: "",
+                    password: "",
+                    confirmPassword: "",
+                });
+                setSubmitClicked(false);
+                setExistingFields([]);
+                setTimeout(() => {
+                    setSuccessMessage("");
+                }, 5000);
             }
         } catch (error) {
             console.error(error);
@@ -41,12 +73,41 @@ function Register() {
                 console.log(error.response.data); // Response data from the server
                 console.log(error.response.status); // Response status code
                 console.log(error.response.headers); // Response headers
+                if (error.response.status === 409) {
+                    // Username or email already exists
+                    const existingData = error.response.data;
+                    setErrorMessage("Username or email already exists.");
+                    setSuccessMessage("");
+                    setExistingFields(existingData);
+                    setTimeout(() => {
+                        setErrorMessage("");
+                    }, 5000);
+                } else {
+                    setErrorMessage("Registration failed. Please try again.");
+                    setSuccessMessage("");
+                    setExistingFields([]);
+                    setTimeout(() => {
+                        setErrorMessage("");
+                    }, 5000);
+                }
             } else if (error.request) {
                 // The request was made but no response was received
                 console.log(error.request);
+                setErrorMessage("Registration failed. Please try again.");
+                setSuccessMessage("");
+                setExistingFields([]);
+                setTimeout(() => {
+                    setErrorMessage("");
+                }, 5000);
             } else {
                 // Something happened in setting up the request that triggered an error
                 console.log("Error", error.message);
+                setErrorMessage("Registration failed. Please try again.");
+                setSuccessMessage("");
+                setExistingFields([]);
+                setTimeout(() => {
+                    setErrorMessage("");
+                }, 5000);
             }
         }
     };
@@ -99,6 +160,8 @@ function Register() {
                                     name="username"
                                     value={formData.username}
                                     onChange={handleChange}
+                                    required
+                                    className={submitClicked && !formData.username ? "invalid" : ""}
                                 />
                             </div>
                         </div>
@@ -111,6 +174,8 @@ function Register() {
                                     name="email"
                                     value={formData.email}
                                     onChange={handleChange}
+                                    required
+                                    className={submitClicked && !formData.email ? "invalid" : ""}
                                 />
                             </div>
                         </div>
@@ -123,6 +188,8 @@ function Register() {
                                     name="password"
                                     value={formData.password}
                                     onChange={handleChange}
+                                    required
+                                    className={submitClicked && !formData.password ? "invalid" : ""}
                                 />
                             </div>
                             <div className="register-form-field">
@@ -133,6 +200,8 @@ function Register() {
                                     name="confirmPassword"
                                     value={formData.confirmPassword}
                                     onChange={handleChange}
+                                    required
+                                    className={submitClicked && !formData.confirmPassword ? "invalid" : ""}
                                 />
                             </div>
                         </div>
@@ -150,13 +219,23 @@ function Register() {
                                 style={{
                                     textDecoration: "none",
                                     color: "#09ad",
-                                    fontWeight: "bold"
+                                    fontWeight: "bold",
                                 }}
                             >
                                 Login
                             </Link>
                         </h3>
                     </div>
+                    {successMessage && (
+                        <div className="alert success-alert">
+                            {successMessage}
+                        </div>
+                    )}
+                    {errorMessage && (
+                        <div className="alert error-alert">
+                            {errorMessage}
+                        </div>
+                    )}
                 </div>
             </div>
 
@@ -168,7 +247,7 @@ function Register() {
                         style={{
                             textDecoration: "none",
                             color: "#09ad",
-                            fontWeight: "bold"
+                            fontWeight: "bold",
                         }}
                     >
                         About

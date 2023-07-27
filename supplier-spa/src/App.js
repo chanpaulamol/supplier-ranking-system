@@ -13,19 +13,12 @@ function App() {
     <div className="App">
       <header className="App-header">Supply Chain Management System</header>
       <Router>
-        <Link
-          to="/dashboard"
-          style={{ textDecoration: "none", color: "#09ad", fontWeight: "bold" }}
-        >
-          Dashboard
-        </Link>
-
         <Routes>
           <Route path="/" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/dashboard/supplier" element={<Supplier />} />
-          <Route path="/dashboard/ranking" element={<Ranking />} />
+          <Route path="/supplier" element={<Supplier />} />
+          <Route path="/ranking" element={<Ranking />} />
           <Route path="/about" element={<About />} />
         </Routes>
       </Router>
